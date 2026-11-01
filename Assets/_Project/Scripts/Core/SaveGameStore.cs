@@ -36,7 +36,7 @@ namespace Veyrath.Core
                 if (!File.Exists(path)) return false;
                 data = JsonUtility.FromJson<SaveData>(File.ReadAllText(path));
                 if (data == null || !data.IsSupportedSchema()) throw new InvalidDataException("Unsupported save schema.");
-                if (data.schemaVersion == 1) data.schemaVersion = SaveData.CurrentSchemaVersion;
+                if (data.schemaVersion < SaveData.CurrentSchemaVersion) data.schemaVersion = SaveData.CurrentSchemaVersion;
                 return true;
             }
             catch (Exception exception)

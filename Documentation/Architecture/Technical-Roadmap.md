@@ -12,6 +12,10 @@ Create one Unity-default-pipeline scene with procedural placeholder geometry, th
 
 Done: First Light now grants one named weapon, supports combat against the Wraith, spawns a collectible heartstone loot drop, gates the quest reward on loot collection, persists loot and inventory state, and uses an atomic JSON save store with schema 1 compatibility. Runtime scene construction is covered by a Play Mode test. The slice remains deliberately asset-free and uses Unity's default render pipeline.
 
+## Fase 3 — Kernsystemen
+
+Done: character progression, XP and skill points, Swordsmanship skill ranks, equipment ownership/equipping, crafting a Warding charm from loot, Edda faction reputation, generated audio feedback, and save schema 3 fields are integrated with the First Light slice. Core Edit Mode tests cover these systems.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.

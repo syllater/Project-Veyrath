@@ -12,10 +12,15 @@ namespace Veyrath.World
         private const string SaveFileName = "veyrath-first-light.json";
         private readonly QuestState quest = new QuestState();
         private readonly InventoryState inventory = new InventoryState();
+        private readonly CharacterProgression progression = new CharacterProgression();
+        private readonly SkillState skills = new SkillState();
+        private readonly EquipmentState equipment = new EquipmentState();
+        private readonly FactionReputation reputation = new FactionReputation();
         private CharacterController player;
         private Transform npc;
         private Transform wraith;
         private Camera gameCamera;
+        private VeyrathAudioFeedback audioFeedback;
         private float health = 100f;
         private float enemyHealth = 60f;
         private float attackCooldown;
@@ -54,6 +59,7 @@ namespace Veyrath.World
             if (Input.GetKeyDown(KeyCode.Space)) Attack();
             if (Input.GetKeyDown(KeyCode.I)) inventoryOpen = !inventoryOpen;
             if (Input.GetKeyDown(KeyCode.O)) settingsOpen = !settingsOpen;
+            if (Input.GetKeyDown(KeyCode.C)) CraftAtEdda();
             if (health <= 0f)
             {
                 health = 100f;
@@ -102,6 +108,10 @@ namespace Veyrath.World
             gameCamera.fieldOfView = 58f;
             gameCamera.transform.position = player.transform.position + new Vector3(0f, 5.2f, -8f);
             gameCamera.transform.LookAt(player.transform.position + Vector3.up * 0.7f);
+
+            GameObject audioObject = new GameObject("Veyrath Audio Feedback");
+            audioFeedback = audioObject.AddComponent<VeyrathAudioFeedback>();
+            audioFeedback.Initialize();
 
             GameObject sun = new GameObject("Placeholder daylight");
             Light directional = sun.AddComponent<Light>();
@@ -162,6 +172,8 @@ namespace Veyrath.World
                 case FirstLightQuestStage.NotStarted:
                     quest.Accept();
                     inventory.AddItem(WeaponName);
+                    equipment.EquipWeapon(WeaponName, inventory);
+                    reputation.Adjust(5);
                     Show("Edda: Take this " + WeaponName + ". End the Wraith's shadow and return to me.", 7f);
                     break;
                 case FirstLightQuestStage.HuntTheWraith:
@@ -187,7 +199,7 @@ namespace Veyrath.World
 
         private void Attack()
         {
-            if (quest.stage != FirstLightQuestStage.HuntTheWraith || wraithDefeated || !inventory.Contains(WeaponName))
+            if (quest.stage != FirstLightQuestStage.HuntTheWraith || wraithDefeated || !equipment.HasWeapon(WeaponName))
             {
                 Show("There is no active target. Speak to Edda to begin the hunt.", 3f);
                 return;
@@ -199,11 +211,14 @@ namespace Veyrath.World
             }
             if (attackCooldown > 0f) return;
             attackCooldown = 0.55f;
-            enemyHealth -= 25f;
+            audioFeedback.PlayEvent();
+            enemyHealth -= 25f + skills.Rank("Swordsmanship") * 5f;
             Show("You strike the Wraith. Its strength: " + Mathf.CeilToInt(Mathf.Max(0f, enemyHealth)) + ".", 2f);
             if (enemyHealth <= 0f)
             {
                 wraithDefeated = true;
+                progression.AddExperience(100);
+                skills.Unlock("Swordsmanship", progression);
                 wraith.gameObject.SetActive(false);
                 loot.SetActive(true);
                 quest.CompleteWraithHunt();
@@ -216,9 +231,21 @@ namespace Veyrath.World
             if (lootCollected || !wraithDefeated || Vector3.Distance(player.transform.position, loot.transform.position) > 2.5f) return;
             lootCollected = true;
             loot.SetActive(false);
+            audioFeedback.PlayEvent();
             inventory.AddItem(LootName);
+            inventory.AddItem(CraftingState.HeartstoneShard);
             inventory.coins += 10;
             Show("Loot collected: " + LootName + " and 10 coins.", 4f);
+        }
+
+        private void CraftAtEdda()
+        {
+            if (Vector3.Distance(player.transform.position, npc.position) > 2.6f)
+            {
+                Show("Crafting requires Edda's workbench.", 3f);
+                return;
+            }
+            Show(CraftingState.CraftWardingCharm(inventory) ? "Crafted a Warding charm from the heartstone shard." : "You need an unused heartstone shard to craft.", 4f);
         }
 
         private void UpdateWraith(float dt)
@@ -256,8 +283,16 @@ namespace Veyrath.World
                 coins = inventory.coins,
                 items = inventory.items.ToArray(),
                 wraithDefeated = wraithDefeated,
-                lootCollected = lootCollected
+                lootCollected = lootCollected,
+                level = progression.level,
+                experience = progression.experience,
+                unspentSkillPoints = progression.unspentSkillPoints,
+                equippedWeapon = equipment.weaponId,
+                eddaFactionReputation = reputation.eddaFaction
             };
+            System.Collections.Generic.List<string> skillData = new System.Collections.Generic.List<string>();
+            foreach (SkillEntry skill in skills.skills) skillData.Add(skill.id + ":" + skill.rank);
+            data.skills = skillData.ToArray();
             string path = Path.Combine(Application.persistentDataPath, SaveFileName);
             if (!SaveGameStore.TryWrite(path, data, out string saveError))
             {
@@ -292,6 +327,19 @@ namespace Veyrath.World
                 if (data.items != null) inventory.items.AddRange(data.items);
                 wraithDefeated = data.wraithDefeated;
                 lootCollected = data.lootCollected;
+                progression.level = Math.Max(1, data.level);
+                progression.experience = Math.Max(0, data.experience);
+                progression.unspentSkillPoints = Math.Max(0, data.unspentSkillPoints);
+                equipment.weaponId = data.equippedWeapon;
+                if (string.IsNullOrEmpty(equipment.weaponId) && inventory.Contains(WeaponName)) equipment.EquipWeapon(WeaponName, inventory);
+                reputation.eddaFaction = data.eddaFactionReputation;
+                skills.skills.Clear();
+                if (data.skills != null)
+                    foreach (string encoded in data.skills)
+                    {
+                        string[] parts = encoded.Split(':');
+                        if (parts.Length == 2 && int.TryParse(parts[1], out int rank)) skills.skills.Add(new SkillEntry { id = parts[0], rank = Math.Max(0, rank) });
+                    }
                 wraith.gameObject.SetActive(!wraithDefeated);
                 loot.SetActive(wraithDefeated && !lootCollected);
                 enemyHealth = wraithDefeated ? 0f : 60f;
@@ -308,9 +356,9 @@ namespace Veyrath.World
         private void OnGUI()
         {
             GUI.Box(new Rect(12, 12, 310, 130), "PROJECT VEYRATH | FIRST LIGHT");
-            GUI.Label(new Rect(24, 42, 285, 24), "Health: " + Mathf.CeilToInt(health) + "     Coins: " + inventory.coins);
+            GUI.Label(new Rect(24, 42, 285, 24), "Health: " + Mathf.CeilToInt(health) + "     Coins: " + inventory.coins + "     Lv: " + progression.level);
             GUI.Label(new Rect(24, 66, 285, 40), "Quest: " + QuestDescription());
-            GUI.Label(new Rect(24, 108, 320, 24), "WASD move | E interact | Space attack | I inventory | O options");
+            GUI.Label(new Rect(24, 108, 350, 24), "WASD move | E interact | Space attack | I inventory | O options | C craft");
             if (Time.time < messageUntil) GUI.Box(new Rect(12, Screen.height - 78, Mathf.Min(Screen.width - 24, 560), 62), message);
             if (GUI.Button(new Rect(Screen.width - 176, 12, 76, 30), "Save")) Save();
             if (GUI.Button(new Rect(Screen.width - 94, 12, 82, 30), "Load")) Load();

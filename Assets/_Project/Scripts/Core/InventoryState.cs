@@ -19,6 +19,11 @@ namespace Veyrath.Core
             if (!string.IsNullOrWhiteSpace(item) && !Contains(item)) items.Add(item);
         }
 
+        public bool RemoveItem(string item)
+        {
+            return !string.IsNullOrWhiteSpace(item) && items.Remove(item);
+        }
+
         public void AddReward(string item, int coinAmount)
         {
             AddItem(item);

@@ -21,7 +21,7 @@ namespace Veyrath.Tests
 
             Assert.That(data.IsSupportedSchema(), Is.True);
             data.schemaVersion = SaveData.CurrentSchemaVersion;
-            Assert.That(data.schemaVersion, Is.EqualTo(2));
+            Assert.That(data.schemaVersion, Is.EqualTo(SaveData.CurrentSchemaVersion));
         }
     }
 }
