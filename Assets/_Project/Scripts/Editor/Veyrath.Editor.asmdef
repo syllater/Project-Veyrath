@@ -1,0 +1,14 @@
+{
+  "name": "Veyrath.Editor",
+  "rootNamespace": "Veyrath.Editor",
+  "references": ["Veyrath.Runtime"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
