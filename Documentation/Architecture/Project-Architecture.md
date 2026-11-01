@@ -26,6 +26,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `CombatArchitecture` keeps weapon definitions, damage calculation, status effects, enemy roles, adaptive tactics, boss phases, difficulty multipliers and balance telemetry as small testable core services. Weapon styles are data-driven (sword, bow, staff and hammer); repeated player patterns can trigger counter tactics, role rules protect allies or create distance, and boss phases switch by health thresholds.
 
+## Story framework
+
+`StoryRuntime` owns quest definitions and progress, objective advancement, prerequisite conditions, world consequence flags, dialogue choice effects and quest-bound companion recruitment. `QuestGenerator` produces deterministic authored-style side quests without coupling story data to the scene controller. Objective progress uses Unity-serializable lists so it can be persisted safely in a later save-schema integration pass.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.

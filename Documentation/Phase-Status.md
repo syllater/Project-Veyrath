@@ -9,7 +9,7 @@
 | 4. Wereldarchitectuur | Geslaagd |
 | 5. NPC-simulatie | Geslaagd |
 | 6. Combat en bossarchitectuur | Geslaagd |
-| 7. Quests en verhaal | Niet gestart |
+| 7. Quests en verhaal | In uitvoering |
 | 8. Facties, economie en oorlog | Niet gestart |
 | 9. Nederzettingen | Niet gestart |
 | 10. Volledige wereldcontent | Niet gestart |

@@ -28,6 +28,10 @@ Done: deterministic NPC profiles and routines, local activity state, offscreen s
 
 Done: four weapon styles, deterministic damage rules, stackable status effects, enemy roles, adaptive tactics, threshold-based boss phases, story/normal/veteran difficulty presets, and balance telemetry. Combat architecture is covered by Edit Mode tests and does not depend on scene assets.
 
+## Fase 7 — Quests en verhaal
+
+In progress: data-driven quest definitions, main/side quest lifecycle, objective conditions, branching dialogue choices, generated fetch quests, companions and world consequence flags. The framework is implemented and covered by Edit Mode tests; integration into the full saved First Light story flow remains the next step.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.
