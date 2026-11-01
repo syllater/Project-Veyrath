@@ -6,7 +6,7 @@ An original offline dark fantasy RPG project. The repository is at its first Uni
 
 Open this folder in Unity **6000.5.5f1**. Choose **Veyrath > Configure Project Foundation** once to set desktop defaults and keyboard input compatibility. If Unity asks to restart after the input change, let it restart, then open `Assets/_Project/Scenes/FirstLight.unity` and press Play. The scene creates its placeholder geometry at runtime and needs no downloaded assets. The project currently uses Unity's default render pipeline while the bundled URP package issue is investigated.
 
-- Move: WASD; interact: E; attack: Space; inventory: I; settings: O.
+- Move: WASD; interact: E; attack: Space; inventory: I; settings: O; map: M.
 - Options panel: resolution, window/fullscreen, V-Sync, frame limit, quality preset, and master volume.
 - Talk to Edda to receive the Ashen shortblade, defeat the Wraith, collect its heartstone loot, then return to Edda for the reward.
 - Use the on-screen Save and Load controls to persist progress.

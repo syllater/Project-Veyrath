@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/FirstLight.unity
     guid: cbad3d26b15d4522a765ab51a580e518
+  - enabled: 1
+    path: Assets/_Project/Scenes/AshenReach.unity
+    guid: aa435f1f358424d6cb9bb1ba72395da8
   m_configObjects: {}

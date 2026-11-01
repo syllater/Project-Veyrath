@@ -16,6 +16,10 @@ Done: First Light now grants one named weapon, supports combat against the Wrait
 
 Done: character progression, XP and skill points, Swordsmanship skill ranks, equipment ownership/equipping, crafting a Warding charm from loot, Edda faction reputation, generated audio feedback, and save schema 3 fields are integrated with the First Light slice. Core Edit Mode tests cover these systems.
 
+## Fase 4 — Wereldarchitectuur
+
+Done: two connected test scenes (`FirstLight` and `AshenReach`), region catalog and definitions, scene-load hook, streaming state manager, LOD policy hook, regional configuration, world map overlay, discoveries, travel anchors, bounded world clock and weather state. Region state is saved and survives a region roundtrip.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.

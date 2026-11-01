@@ -23,6 +23,11 @@ namespace Veyrath.Core
         public string[] skills = Array.Empty<string>();
         public string equippedWeapon;
         public int eddaFactionReputation;
+        public string currentRegionId = "first-light";
+        public int worldMinutes;
+        public string weather = "clear";
+        public string[] discoveries = Array.Empty<string>();
+        public string[] travelAnchors = Array.Empty<string>();
 
         public bool IsSupportedSchema()
         {

@@ -6,7 +6,7 @@
 | 1. Technische fundering | Geslaagd |
 | 2. Verticale slice | Geslaagd |
 | 3. Kernsystemen | Geslaagd |
-| 4. Wereldarchitectuur | Niet gestart |
+| 4. Wereldarchitectuur | Geslaagd |
 | 5. NPC-simulatie | Niet gestart |
 | 6. Combat en bossarchitectuur | Niet gestart |
 | 7. Quests en verhaal | Niet gestart |

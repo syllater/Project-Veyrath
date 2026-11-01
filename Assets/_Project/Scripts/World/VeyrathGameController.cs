@@ -21,6 +21,8 @@ namespace Veyrath.World
         private Transform wraith;
         private Camera gameCamera;
         private VeyrathAudioFeedback audioFeedback;
+        private RegionStreamingManager regionStreaming;
+        private bool mapOpen;
         private float health = 100f;
         private float enemyHealth = 60f;
         private float attackCooldown;
@@ -60,6 +62,7 @@ namespace Veyrath.World
             if (Input.GetKeyDown(KeyCode.I)) inventoryOpen = !inventoryOpen;
             if (Input.GetKeyDown(KeyCode.O)) settingsOpen = !settingsOpen;
             if (Input.GetKeyDown(KeyCode.C)) CraftAtEdda();
+            if (Input.GetKeyDown(KeyCode.M)) mapOpen = !mapOpen;
             if (health <= 0f)
             {
                 health = 100f;
@@ -112,6 +115,11 @@ namespace Veyrath.World
             GameObject audioObject = new GameObject("Veyrath Audio Feedback");
             audioFeedback = audioObject.AddComponent<VeyrathAudioFeedback>();
             audioFeedback.Initialize();
+
+            regionStreaming = gameObject.GetComponent<RegionStreamingManager>();
+            if (regionStreaming == null) regionStreaming = gameObject.AddComponent<RegionStreamingManager>();
+            regionStreaming.Discover("first-light-clearing");
+            regionStreaming.UnlockAnchor("first-light-camp");
 
             GameObject sun = new GameObject("Placeholder daylight");
             Light directional = sun.AddComponent<Light>();
@@ -291,6 +299,12 @@ namespace Veyrath.World
                 equippedWeapon = equipment.weaponId,
                 eddaFactionReputation = reputation.eddaFaction
             };
+            WorldState world = regionStreaming.State;
+            data.currentRegionId = world.currentRegionId;
+            data.worldMinutes = world.worldMinutes;
+            data.weather = world.weather;
+            data.discoveries = world.discoveries.ConvertAll(item => item.id).ToArray();
+            data.travelAnchors = world.travelAnchors.ConvertAll(item => item.id).ToArray();
             System.Collections.Generic.List<string> skillData = new System.Collections.Generic.List<string>();
             foreach (SkillEntry skill in skills.skills) skillData.Add(skill.id + ":" + skill.rank);
             data.skills = skillData.ToArray();
@@ -334,6 +348,13 @@ namespace Veyrath.World
                 equipment.weaponId = data.equippedWeapon;
                 if (string.IsNullOrEmpty(equipment.weaponId) && inventory.Contains(WeaponName)) equipment.EquipWeapon(WeaponName, inventory);
                 reputation.eddaFaction = data.eddaFactionReputation;
+                regionStreaming.State.currentRegionId = string.IsNullOrEmpty(data.currentRegionId) ? "first-light" : data.currentRegionId;
+                regionStreaming.State.worldMinutes = Math.Max(0, data.worldMinutes) % (24 * 60);
+                regionStreaming.State.weather = string.IsNullOrEmpty(data.weather) ? "clear" : data.weather;
+                regionStreaming.State.discoveries.Clear();
+                if (data.discoveries != null) foreach (string id in data.discoveries) regionStreaming.State.Discover(id);
+                regionStreaming.State.travelAnchors.Clear();
+                if (data.travelAnchors != null) foreach (string id in data.travelAnchors) regionStreaming.State.UnlockAnchor(id, regionStreaming.State.currentRegionId);
                 skills.skills.Clear();
                 if (data.skills != null)
                     foreach (string encoded in data.skills)
@@ -360,6 +381,7 @@ namespace Veyrath.World
             GUI.Label(new Rect(24, 42, 285, 24), "Health: " + Mathf.CeilToInt(health) + "     Coins: " + inventory.coins + "     Lv: " + progression.level);
             GUI.Label(new Rect(24, 66, 285, 40), "Quest: " + QuestDescription());
             GUI.Label(new Rect(24, 108, 350, 24), "WASD move | E interact | Space attack | I inventory | O options | C craft");
+            if (mapOpen) DrawWorldMap();
             if (Time.time < messageUntil) GUI.Box(new Rect(12, Screen.height - 78, Mathf.Min(Screen.width - 24, 560), 62), message);
             if (GUI.Button(new Rect(Screen.width - 176, 12, 76, 30), "Save")) Save();
             if (GUI.Button(new Rect(Screen.width - 94, 12, 82, 30), "Load")) Load();
@@ -393,6 +415,17 @@ namespace Veyrath.World
             float volume = GUI.HorizontalSlider(new Rect(panelX + 112, 265, 138, 20), VeyrathSettings.MasterVolume, 0f, 1f);
             if (!Mathf.Approximately(volume, VeyrathSettings.MasterVolume)) VeyrathSettings.SetMasterVolume(volume);
             if (GUI.Button(new Rect(panelX + 12, 286, 264, 26), "Close")) settingsOpen = false;
+        }
+
+        private void DrawWorldMap()
+        {
+            WorldState world = regionStreaming.State;
+            GUI.Box(new Rect(340, 52, 300, 190), "WORLD MAP");
+            GUI.Label(new Rect(356, 84, 270, 24), "Current region: " + RegionCatalog.Get(world.currentRegionId).displayName);
+            GUI.Label(new Rect(356, 112, 270, 24), "Connected: Ashen Reach");
+            GUI.Label(new Rect(356, 140, 270, 24), "World time: " + (world.worldMinutes / 60).ToString("00") + ":" + (world.worldMinutes % 60).ToString("00"));
+            GUI.Label(new Rect(356, 168, 270, 24), "Weather: " + world.weather);
+            GUI.Label(new Rect(356, 196, 270, 24), "M closes map");
         }
 
         private string QuestDescription()

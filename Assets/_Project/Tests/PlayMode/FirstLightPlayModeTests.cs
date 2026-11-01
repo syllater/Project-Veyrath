@@ -23,6 +23,23 @@ namespace Veyrath.Tests
             Assert.That(GameObject.Find("Wraith | Enemy placeholder"), Is.Not.Null);
             Assert.That(GameObject.Find("First Light Camera"), Is.Not.Null);
             Assert.That(FindIncludingInactive("Loot | Wraith heartstone"), Is.Not.Null);
+            Assert.That(Object.FindFirstObjectByType<RegionStreamingManager>(), Is.Not.Null);
+        }
+
+        [UnityTest]
+        public IEnumerator ConnectedRegionStateSurvivesARegionRoundTrip()
+        {
+            SceneManager.LoadScene("FirstLight");
+            yield return null;
+            yield return null;
+            RegionStreamingManager manager = Object.FindFirstObjectByType<RegionStreamingManager>();
+
+            Assert.That(manager.EnterRegion("ashen-reach"), Is.True);
+            manager.Discover("ashen-reach-gate");
+            manager.SetWeather("mist");
+            Assert.That(manager.EnterRegion("first-light"), Is.True);
+            Assert.That(manager.State.discoveries.Exists(item => item.id == "ashen-reach-gate"), Is.True);
+            Assert.That(manager.State.weather, Is.EqualTo("mist"));
         }
 
         private static GameObject FindIncludingInactive(string name)

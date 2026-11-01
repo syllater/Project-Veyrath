@@ -20,10 +20,19 @@ namespace Veyrath.Editor
             GameObject controller = new GameObject("Veyrath Game Controller");
             controller.AddComponent<VeyrathGameController>();
             EditorSceneManager.SaveScene(scene, folder + "/FirstLight.unity");
-            EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(folder + "/FirstLight.unity", true) };
+            Scene ashenReach = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            new GameObject("Region Anchor | Ashen Reach Gate");
+            EditorSceneManager.SaveScene(ashenReach, folder + "/AshenReach.unity");
+            EditorSceneManager.OpenScene(folder + "/FirstLight.unity");
+            EditorBuildSettings.scenes = new[]
+            {
+                new EditorBuildSettingsScene(folder + "/FirstLight.unity", true),
+                new EditorBuildSettingsScene(folder + "/AshenReach.unity", true)
+            };
             AssetDatabase.SaveAssets();
             Debug.Log("Generated First Light scene and set it as the first build scene.");
         }
     }
+
 }
 #endif
