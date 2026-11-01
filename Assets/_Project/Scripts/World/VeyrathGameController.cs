@@ -22,6 +22,7 @@ namespace Veyrath.World
         private Camera gameCamera;
         private VeyrathAudioFeedback audioFeedback;
         private RegionStreamingManager regionStreaming;
+        private NpcSimulationRuntime npcRuntime;
         private bool mapOpen;
         private float health = 100f;
         private float enemyHealth = 60f;
@@ -120,6 +121,8 @@ namespace Veyrath.World
             if (regionStreaming == null) regionStreaming = gameObject.AddComponent<RegionStreamingManager>();
             regionStreaming.Discover("first-light-clearing");
             regionStreaming.UnlockAnchor("first-light-camp");
+            npcRuntime = gameObject.AddComponent<NpcSimulationRuntime>();
+            npcRuntime.Initialize(regionStreaming);
 
             GameObject sun = new GameObject("Placeholder daylight");
             Light directional = sun.AddComponent<Light>();
@@ -183,7 +186,8 @@ namespace Veyrath.World
                     inventory.AddItem(WeaponName);
                     equipment.EquipWeapon(WeaponName, inventory);
                     reputation.Adjust(5);
-                    Show("Edda: Take this " + WeaponName + ". End the Wraith's shadow and return to me.", 7f);
+                    npcRuntime.Service.AdjustRelationship("edda", 5);
+                    Show(npcRuntime.Service.GetState("edda").ContextLine(npcRuntime.Service.GetProfile("edda")) + " Take this " + WeaponName + ".", 7f);
                     break;
                 case FirstLightQuestStage.HuntTheWraith:
                     Show("Edda: The Wraith is somewhere up the old road. Be careful.", 5f);
@@ -197,6 +201,7 @@ namespace Veyrath.World
                     if (quest.ClaimReward())
                     {
                         inventory.AddReward("Edda's iron charm", 25);
+                        npcRuntime.Service.AdjustRelationship("edda", 20);
                         Show("Edda: You kept your word. Take this charm and 25 coins.", 6f);
                     }
                     break;
@@ -305,6 +310,7 @@ namespace Veyrath.World
             data.weather = world.weather;
             data.discoveries = world.discoveries.ConvertAll(item => item.id).ToArray();
             data.travelAnchors = world.travelAnchors.ConvertAll(item => item.id).ToArray();
+            data.npcStates = npcRuntime.Service.SerializeStates();
             System.Collections.Generic.List<string> skillData = new System.Collections.Generic.List<string>();
             foreach (SkillEntry skill in skills.skills) skillData.Add(skill.id + ":" + skill.rank);
             data.skills = skillData.ToArray();
@@ -355,6 +361,7 @@ namespace Veyrath.World
                 if (data.discoveries != null) foreach (string id in data.discoveries) regionStreaming.State.Discover(id);
                 regionStreaming.State.travelAnchors.Clear();
                 if (data.travelAnchors != null) foreach (string id in data.travelAnchors) regionStreaming.State.UnlockAnchor(id, regionStreaming.State.currentRegionId);
+                npcRuntime.Service.DeserializeStates(data.npcStates);
                 skills.skills.Clear();
                 if (data.skills != null)
                     foreach (string encoded in data.skills)

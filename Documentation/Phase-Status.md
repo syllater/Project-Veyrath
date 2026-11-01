@@ -7,7 +7,7 @@
 | 2. Verticale slice | Geslaagd |
 | 3. Kernsystemen | Geslaagd |
 | 4. Wereldarchitectuur | Geslaagd |
-| 5. NPC-simulatie | Niet gestart |
+| 5. NPC-simulatie | Geslaagd |
 | 6. Combat en bossarchitectuur | Niet gestart |
 | 7. Quests en verhaal | Niet gestart |
 | 8. Facties, economie en oorlog | Niet gestart |

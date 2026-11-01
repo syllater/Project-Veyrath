@@ -24,6 +24,7 @@ namespace Veyrath.Tests
             Assert.That(GameObject.Find("First Light Camera"), Is.Not.Null);
             Assert.That(FindIncludingInactive("Loot | Wraith heartstone"), Is.Not.Null);
             Assert.That(Object.FindFirstObjectByType<RegionStreamingManager>(), Is.Not.Null);
+            Assert.That(Object.FindFirstObjectByType<NpcSimulationRuntime>(), Is.Not.Null);
         }
 
         [UnityTest]

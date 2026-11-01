@@ -5,7 +5,7 @@ namespace Veyrath.Core
     [Serializable]
     public sealed class SaveData
     {
-        public const int CurrentSchemaVersion = 3;
+        public const int CurrentSchemaVersion = 4;
         public int schemaVersion = CurrentSchemaVersion;
         public float playerX;
         public float playerY;
@@ -28,6 +28,7 @@ namespace Veyrath.Core
         public string weather = "clear";
         public string[] discoveries = Array.Empty<string>();
         public string[] travelAnchors = Array.Empty<string>();
+        public string npcStates = string.Empty;
 
         public bool IsSupportedSchema()
         {

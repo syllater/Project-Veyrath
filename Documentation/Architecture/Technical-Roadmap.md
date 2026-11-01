@@ -20,6 +20,10 @@ Done: character progression, XP and skill points, Swordsmanship skill ranks, equ
 
 Done: two connected test scenes (`FirstLight` and `AshenReach`), region catalog and definitions, scene-load hook, streaming state manager, LOD policy hook, regional configuration, world map overlay, discoveries, travel anchors, bounded world clock and weather state. Region state is saved and survives a region roundtrip.
 
+## Fase 5 — NPC-simulatie
+
+Done: deterministic NPC profiles and routines, local activity state, offscreen simulation toggle, relationship values, context-sensitive dialogue, NPC persistence in save schema 4 and Edda runtime integration. The simulation state survives region transitions and save/load.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.
