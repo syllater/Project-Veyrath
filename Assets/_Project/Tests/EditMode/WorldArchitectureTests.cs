@@ -39,5 +39,14 @@ namespace Veyrath.Tests
             Assert.That(world.worldMinutes, Is.EqualTo(45));
             Assert.That(world.weather, Is.EqualTo("mist"));
         }
+
+        [Test]
+        public void ReEnteringCurrentRegionIsIdempotent()
+        {
+            WorldState world = new WorldState();
+            world.AdvanceTime(20);
+            Assert.That(world.EnterRegion("first-light"), Is.True);
+            Assert.That(world.worldMinutes, Is.EqualTo(20));
+        }
     }
 }

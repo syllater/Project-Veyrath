@@ -22,6 +22,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `NpcProfile` stores identity, faction, home region and routine segments. `NpcSimulationService` resolves deterministic activity from world minutes, advances offscreen NPCs when enabled, tracks relationships and serializes state. `NpcSimulationRuntime` registers Edda and keeps her activity synchronized with the region world clock; dialogue reflects activity and relationship context.
 
+## Combat and boss architecture
+
+`CombatArchitecture` keeps weapon definitions, damage calculation, status effects, enemy roles, adaptive tactics, boss phases, difficulty multipliers and balance telemetry as small testable core services. Weapon styles are data-driven (sword, bow, staff and hammer); repeated player patterns can trigger counter tactics, role rules protect allies or create distance, and boss phases switch by health thresholds.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.

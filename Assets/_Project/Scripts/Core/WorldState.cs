@@ -29,6 +29,7 @@ namespace Veyrath.Core
 
         public bool EnterRegion(string regionId)
         {
+            if (regionId == currentRegionId) return true;
             if (!RegionCatalog.AreConnected(currentRegionId, regionId)) return false;
             currentRegionId = regionId;
             AdvanceTime(15);

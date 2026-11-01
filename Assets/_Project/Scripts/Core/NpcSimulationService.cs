@@ -12,6 +12,7 @@ namespace Veyrath.Core
         public void Register(NpcProfile profile)
         {
             if (profile == null || string.IsNullOrWhiteSpace(profile.id)) return;
+            if (GetProfile(profile.id) != null) return;
             Profiles.Add(profile);
             States.Add(new NpcState { id = profile.id, regionId = profile.homeRegionId, activity = "idle" });
             SimulateTo(0);
@@ -59,8 +60,8 @@ namespace Veyrath.Core
                 if (state == null) continue;
                 state.regionId = parts[1];
                 state.activity = parts[2];
-                int.TryParse(parts[3], out state.relationship);
-                int.TryParse(parts[4], out state.lastSimulatedMinute);
+                if (int.TryParse(parts[3], out int relationship)) state.relationship = Math.Max(-100, Math.Min(100, relationship));
+                if (int.TryParse(parts[4], out int minute)) state.lastSimulatedMinute = ((minute % (24 * 60)) + (24 * 60)) % (24 * 60);
             }
         }
     }

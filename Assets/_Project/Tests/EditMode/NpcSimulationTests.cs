@@ -54,5 +54,14 @@ namespace Veyrath.Tests
             Assert.That(restored.GetState("edda").activity, Is.EqualTo("work"));
             Assert.That(restored.GetState("edda").relationship, Is.EqualTo(15));
         }
+
+        [Test]
+        public void DuplicateRegistrationDoesNotDuplicateState()
+        {
+            NpcSimulationService service = CreateService();
+            service.Register(service.GetProfile("edda"));
+            Assert.That(service.Profiles.Count, Is.EqualTo(1));
+            Assert.That(service.States.Count, Is.EqualTo(1));
+        }
     }
 }

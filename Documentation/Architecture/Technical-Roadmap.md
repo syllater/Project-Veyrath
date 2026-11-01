@@ -24,6 +24,10 @@ Done: two connected test scenes (`FirstLight` and `AshenReach`), region catalog 
 
 Done: deterministic NPC profiles and routines, local activity state, offscreen simulation toggle, relationship values, context-sensitive dialogue, NPC persistence in save schema 4 and Edda runtime integration. The simulation state survives region transitions and save/load.
 
+## Fase 6 — Combat, skills en bossarchitectuur
+
+Done: four weapon styles, deterministic damage rules, stackable status effects, enemy roles, adaptive tactics, threshold-based boss phases, story/normal/veteran difficulty presets, and balance telemetry. Combat architecture is covered by Edit Mode tests and does not depend on scene assets.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.

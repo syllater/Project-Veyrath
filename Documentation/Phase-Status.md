@@ -8,7 +8,7 @@
 | 3. Kernsystemen | Geslaagd |
 | 4. Wereldarchitectuur | Geslaagd |
 | 5. NPC-simulatie | Geslaagd |
-| 6. Combat en bossarchitectuur | Niet gestart |
+| 6. Combat en bossarchitectuur | Geslaagd |
 | 7. Quests en verhaal | Niet gestart |
 | 8. Facties, economie en oorlog | Niet gestart |
 | 9. Nederzettingen | Niet gestart |
