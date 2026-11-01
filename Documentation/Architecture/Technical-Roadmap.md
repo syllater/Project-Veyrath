@@ -32,6 +32,10 @@ Done: four weapon styles, deterministic damage rules, stackable status effects, 
 
 In progress: data-driven quest definitions, main/side quest lifecycle, objective conditions, branching dialogue choices, generated fetch quests, companions and world consequence flags. The framework is implemented and covered by Edit Mode tests; integration into the full saved First Light story flow remains the next step.
 
+## Fase 8 — Facties, economie en oorlog
+
+Done: faction definitions and bounded reputation, territory ownership, regional stockpiles, risk-aware trade routes, treasury flow, conflicts, treaties, and player-driven world reactions. The controlled simulation is covered by Edit Mode tests.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.

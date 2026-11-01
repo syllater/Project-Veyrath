@@ -142,8 +142,10 @@ namespace Veyrath.Core
         {
             if (definition == null || state == null) return false;
             foreach (QuestObjective objective in definition.objectives)
+            {
                 QuestObjectiveProgress progress = objective == null ? null : state.objectiveProgress.Find(item => item.objectiveId == objective.id);
                 if (objective == null || progress == null || progress.amount < objective.requiredAmount) return false;
+            }
             return true;
         }
 

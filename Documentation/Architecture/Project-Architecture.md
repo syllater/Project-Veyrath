@@ -30,6 +30,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `StoryRuntime` owns quest definitions and progress, objective advancement, prerequisite conditions, world consequence flags, dialogue choice effects and quest-bound companion recruitment. `QuestGenerator` produces deterministic authored-style side quests without coupling story data to the scene controller. Objective progress uses Unity-serializable lists so it can be persisted safely in a later save-schema integration pass.
 
+## Faction, economy and conflict simulation
+
+`FactionWorldSimulation` stores faction reputation/influence/treasury, territory ownership, regional stockpiles, risk-aware trade routes, conflicts, treaties and world reactions. `ApplyPlayerAction` provides a controlled hook for defend, trade and sabotage actions; daily simulation moves stock and funds along active routes while treaties suppress conflicts until expiry.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.
