@@ -5,7 +5,8 @@ namespace Veyrath.Core
     [Serializable]
     public sealed class SaveData
     {
-        public int schemaVersion = 1;
+        public const int CurrentSchemaVersion = 2;
+        public int schemaVersion = CurrentSchemaVersion;
         public float playerX;
         public float playerY;
         public float playerZ;
@@ -15,5 +16,11 @@ namespace Veyrath.Core
         public int coins;
         public string[] items = Array.Empty<string>();
         public bool wraithDefeated;
+        public bool lootCollected;
+
+        public bool IsSupportedSchema()
+        {
+            return schemaVersion == 1 || schemaVersion == CurrentSchemaVersion;
+        }
     }
 }

@@ -9,9 +9,19 @@ namespace Veyrath.Core
         public int coins;
         public List<string> items = new List<string>();
 
+        public bool Contains(string item)
+        {
+            return !string.IsNullOrWhiteSpace(item) && items.Contains(item);
+        }
+
+        public void AddItem(string item)
+        {
+            if (!string.IsNullOrWhiteSpace(item) && !Contains(item)) items.Add(item);
+        }
+
         public void AddReward(string item, int coinAmount)
         {
-            if (!string.IsNullOrWhiteSpace(item)) items.Add(item);
+            AddItem(item);
             coins = Math.Max(0, coins + coinAmount);
         }
     }

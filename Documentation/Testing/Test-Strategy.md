@@ -9,9 +9,9 @@
 
 ## Current verification
 
-Unity CLI 1.0.0-beta.6; installed Unity Editor 6000.5.5f1 x86_64 with Mac and Windows standalone modules; .NET SDK 10.0.201 arm64. Unity Personal is activated. After excluding the bundled URP package (which fails compilation inside Unity package source), project scripts compiled and the foundation setup ran. Unity Edit Mode: **4 passed, 0 failed**. macOS StandaloneOSX player build: **completed** at `Builds/ProjectVeyrath.app`.
+Unity CLI 1.0.0-beta.6; installed Unity Editor 6000.5.5f1 x86_64 with Mac and Windows standalone modules; .NET SDK 10.0.201 arm64. Unity Personal is activated. After excluding the bundled URP package (which fails compilation inside Unity package source), project scripts compiled and the foundation setup ran. Unity Edit Mode baseline: **4 passed, 0 failed**. Phase 2 adds four Edit Mode checks and one Play Mode scene smoke test. macOS StandaloneOSX player build: **completed** at `Builds/ProjectVeyrath.app`.
 
-The repository includes Edit Mode tests for quest progression and reward idempotence plus inventory reward validation. Current test results are generated at `test-results.xml` and excluded from Git.
+The repository includes Edit Mode tests for quest progression, reward idempotence, inventory uniqueness and save schema compatibility, plus a Play Mode scene smoke test. Current test results are generated at `test-results.xml` and excluded from Git.
 
 ## Required acceptance run
 

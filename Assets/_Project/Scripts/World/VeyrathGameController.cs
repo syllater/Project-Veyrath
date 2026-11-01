@@ -25,6 +25,10 @@ namespace Veyrath.World
         private bool inventoryOpen;
         private bool settingsOpen;
         private bool wraithDefeated;
+        private bool lootCollected;
+        private GameObject loot;
+        private const string WeaponName = "Ashen shortblade";
+        private const string LootName = "Wraith heartstone";
         private Vector3 spawnPoint = new Vector3(0f, 1f, -4f);
 
         private void Start()
@@ -46,6 +50,7 @@ namespace Veyrath.World
             UpdateWraith(dt);
 
             if (Input.GetKeyDown(KeyCode.E)) Interact();
+            if (Input.GetKeyDown(KeyCode.E)) CollectLoot();
             if (Input.GetKeyDown(KeyCode.Space)) Attack();
             if (Input.GetKeyDown(KeyCode.I)) inventoryOpen = !inventoryOpen;
             if (Input.GetKeyDown(KeyCode.O)) settingsOpen = !settingsOpen;
@@ -88,6 +93,8 @@ namespace Veyrath.World
 
             npc = CreatePrimitive("Edda | NPC placeholder", PrimitiveType.Capsule, new Vector3(0f, 1f, 3f), Vector3.one, npcMat).transform;
             wraith = CreatePrimitive("Wraith | Enemy placeholder", PrimitiveType.Capsule, new Vector3(0f, 1f, 11f), Vector3.one, enemyMat).transform;
+            loot = CreatePrimitive("Loot | Wraith heartstone", PrimitiveType.Sphere, new Vector3(0f, 0.55f, 11f), Vector3.one * 0.55f, MakeMaterial(new Color(0.65f, 0.25f, 0.75f)));
+            loot.SetActive(false);
 
             GameObject cameraObject = new GameObject("First Light Camera");
             gameCamera = cameraObject.AddComponent<Camera>();
@@ -154,12 +161,18 @@ namespace Veyrath.World
             {
                 case FirstLightQuestStage.NotStarted:
                     quest.Accept();
-                    Show("Edda: A Wraith haunts the old road. End its shadow and return to me.", 7f);
+                    inventory.AddItem(WeaponName);
+                    Show("Edda: Take this " + WeaponName + ". End the Wraith's shadow and return to me.", 7f);
                     break;
                 case FirstLightQuestStage.HuntTheWraith:
                     Show("Edda: The Wraith is somewhere up the old road. Be careful.", 5f);
                     break;
                 case FirstLightQuestStage.ReturnToEdda:
+                    if (!lootCollected)
+                    {
+                        Show("Collect the Wraith heartstone first.", 3f);
+                        break;
+                    }
                     if (quest.ClaimReward())
                     {
                         inventory.AddReward("Edda's iron charm", 25);
@@ -174,7 +187,7 @@ namespace Veyrath.World
 
         private void Attack()
         {
-            if (quest.stage != FirstLightQuestStage.HuntTheWraith || wraithDefeated)
+            if (quest.stage != FirstLightQuestStage.HuntTheWraith || wraithDefeated || !inventory.Contains(WeaponName))
             {
                 Show("There is no active target. Speak to Edda to begin the hunt.", 3f);
                 return;
@@ -192,9 +205,20 @@ namespace Veyrath.World
             {
                 wraithDefeated = true;
                 wraith.gameObject.SetActive(false);
+                loot.SetActive(true);
                 quest.CompleteWraithHunt();
-                Show("The Wraith dissolves. Return to Edda for your reward.", 6f);
+                Show("The Wraith dissolves. Collect the heartstone, then return to Edda.", 6f);
             }
+        }
+
+        private void CollectLoot()
+        {
+            if (lootCollected || !wraithDefeated || Vector3.Distance(player.transform.position, loot.transform.position) > 2.5f) return;
+            lootCollected = true;
+            loot.SetActive(false);
+            inventory.AddItem(LootName);
+            inventory.coins += 10;
+            Show("Loot collected: " + LootName + " and 10 coins.", 4f);
         }
 
         private void UpdateWraith(float dt)
@@ -231,10 +255,16 @@ namespace Veyrath.World
                 rewardClaimed = quest.rewardClaimed,
                 coins = inventory.coins,
                 items = inventory.items.ToArray(),
-                wraithDefeated = wraithDefeated
+                wraithDefeated = wraithDefeated,
+                lootCollected = lootCollected
             };
             string path = Path.Combine(Application.persistentDataPath, SaveFileName);
-            File.WriteAllText(path, JsonUtility.ToJson(data, true));
+            if (!SaveGameStore.TryWrite(path, data, out string saveError))
+            {
+                VeyrathLogger.Error("Save", "Could not save First Light: " + saveError);
+                Show("Save could not be written.", 3f);
+                return;
+            }
             VeyrathLogger.Info("Save", "First Light progress saved to " + path);
             Show("Progress saved locally.", 3f);
         }
@@ -249,8 +279,8 @@ namespace Veyrath.World
             }
             try
             {
-                SaveData data = JsonUtility.FromJson<SaveData>(File.ReadAllText(path));
-                if (data == null || data.schemaVersion != 1) throw new InvalidDataException("Unsupported save schema.");
+                if (!SaveGameStore.TryRead(path, out SaveData data, out string loadError))
+                    throw new InvalidDataException(loadError ?? "Save could not be read.");
                 player.enabled = false;
                 player.transform.position = new Vector3(data.playerX, data.playerY, data.playerZ);
                 player.enabled = true;
@@ -261,7 +291,9 @@ namespace Veyrath.World
                 inventory.items.Clear();
                 if (data.items != null) inventory.items.AddRange(data.items);
                 wraithDefeated = data.wraithDefeated;
+                lootCollected = data.lootCollected;
                 wraith.gameObject.SetActive(!wraithDefeated);
+                loot.SetActive(wraithDefeated && !lootCollected);
                 enemyHealth = wraithDefeated ? 0f : 60f;
                 VeyrathLogger.Info("Save", "First Light progress loaded from " + path);
                 Show("Progress loaded.", 3f);

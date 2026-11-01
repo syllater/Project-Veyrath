@@ -26,5 +26,18 @@ namespace Veyrath.Tests
             Assert.That(inventory.items, Is.Empty);
             Assert.That(inventory.coins, Is.Zero);
         }
+
+        [Test]
+        public void NamedLootAndWeaponAreUniqueInventoryEntries()
+        {
+            InventoryState inventory = new InventoryState();
+
+            inventory.AddItem("Ashen shortblade");
+            inventory.AddItem("Wraith heartstone");
+            inventory.AddItem("Wraith heartstone");
+
+            Assert.That(inventory.Contains("Ashen shortblade"), Is.True);
+            Assert.That(inventory.items.Count, Is.EqualTo(2));
+        }
     }
 }

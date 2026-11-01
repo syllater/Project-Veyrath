@@ -4,9 +4,13 @@
 
 Done: inspected the empty repository, existing `.DS_Store`, Git state, host, Unity CLI/editor, .NET, and platform modules. No existing project or commits. Risks and setup are in `Decisions/Architecture-Decisions.md` and the phase report.
 
-## Fase 1/2 — Foundation and first slice (current)
+## Fase 1 — Foundation
 
 Create one Unity-default-pipeline scene with procedural placeholder geometry, third-person follow camera, movement, NPC interaction/dialogue, one quest, one enemy and combat, reward/inventory, and JSON save/load. Add a centralized logger, runtime bootstrap, persistent desktop settings UI, and Edit Mode tests. The repeatable Editor setup is under `Assets/_Project/Scripts/Editor`. URP is deferred because the installed editor's bundled package set fails in package code during compilation.
+
+## Fase 2 — Eerste speelbare verticale slice
+
+Done: First Light now grants one named weapon, supports combat against the Wraith, spawns a collectible heartstone loot drop, gates the quest reward on loot collection, persists loot and inventory state, and uses an atomic JSON save store with schema 1 compatibility. Runtime scene construction is covered by a Play Mode test. The slice remains deliberately asset-free and uses Unity's default render pipeline.
 
 ## Following steps
 

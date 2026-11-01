@@ -8,7 +8,7 @@ Open this folder in Unity **6000.5.5f1**. Choose **Veyrath > Configure Project F
 
 - Move: WASD; interact: E; attack: Space; inventory: I; settings: O.
 - Options panel: resolution, window/fullscreen, V-Sync, frame limit, quality preset, and master volume.
-- Talk to Edda to accept the quest, defeat the Wraith, then return to Edda for the reward.
+- Talk to Edda to receive the Ashen shortblade, defeat the Wraith, collect its heartstone loot, then return to Edda for the reward.
 - Use the on-screen Save and Load controls to persist progress.
 
 ## Current state

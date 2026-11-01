@@ -27,5 +27,14 @@ namespace Veyrath.Tests
             Assert.That(quest.ClaimReward(), Is.False);
             Assert.That(quest.stage, Is.EqualTo(FirstLightQuestStage.Complete));
         }
+
+        [Test]
+        public void NewQuestStartsAtNotStarted()
+        {
+            QuestState quest = new QuestState();
+
+            Assert.That(quest.stage, Is.EqualTo(FirstLightQuestStage.NotStarted));
+            Assert.That(quest.rewardClaimed, Is.False);
+        }
     }
 }

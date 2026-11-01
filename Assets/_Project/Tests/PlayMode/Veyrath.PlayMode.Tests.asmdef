@@ -1,0 +1,15 @@
+{
+  "name": "Veyrath.PlayMode.Tests",
+  "rootNamespace": "Veyrath.Tests",
+  "references": ["Veyrath.Runtime"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "optionalUnityReferences": ["TestAssemblies"]
+}
