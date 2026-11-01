@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 using Veyrath.Core;
+using UnityEngine.Rendering;
 
 namespace Veyrath.World
 {
@@ -22,12 +23,15 @@ namespace Veyrath.World
         private float messageUntil;
         private string message = "Find Edda near the ruined arch.";
         private bool inventoryOpen;
+        private bool settingsOpen;
         private bool wraithDefeated;
         private Vector3 spawnPoint = new Vector3(0f, 1f, -4f);
 
         private void Start()
         {
+            VeyrathSettings.Initialize();
             BuildWorld();
+            VeyrathLogger.Info("Game", "First Light gameplay scene started.");
             Show("Find Edda near the ruined arch.", 8f);
         }
 
@@ -44,6 +48,7 @@ namespace Veyrath.World
             if (Input.GetKeyDown(KeyCode.E)) Interact();
             if (Input.GetKeyDown(KeyCode.Space)) Attack();
             if (Input.GetKeyDown(KeyCode.I)) inventoryOpen = !inventoryOpen;
+            if (Input.GetKeyDown(KeyCode.O)) settingsOpen = !settingsOpen;
             if (health <= 0f)
             {
                 health = 100f;
@@ -101,8 +106,9 @@ namespace Veyrath.World
 
         private static Material MakeMaterial(Color color)
         {
-            Shader shader = Shader.Find("Universal Render Pipeline/Lit");
-            if (shader == null) shader = Shader.Find("Standard");
+            bool scriptablePipelineActive = GraphicsSettings.currentRenderPipeline != null;
+            Shader shader = Shader.Find(scriptablePipelineActive ? "Universal Render Pipeline/Lit" : "Standard");
+            if (shader == null) shader = Shader.Find("Hidden/InternalErrorShader");
             Material material = new Material(shader) { color = color };
             return material;
         }
@@ -229,6 +235,7 @@ namespace Veyrath.World
             };
             string path = Path.Combine(Application.persistentDataPath, SaveFileName);
             File.WriteAllText(path, JsonUtility.ToJson(data, true));
+            VeyrathLogger.Info("Save", "First Light progress saved to " + path);
             Show("Progress saved locally.", 3f);
         }
 
@@ -256,11 +263,12 @@ namespace Veyrath.World
                 wraithDefeated = data.wraithDefeated;
                 wraith.gameObject.SetActive(!wraithDefeated);
                 enemyHealth = wraithDefeated ? 0f : 60f;
+                VeyrathLogger.Info("Save", "First Light progress loaded from " + path);
                 Show("Progress loaded.", 3f);
             }
             catch (Exception exception)
             {
-                Debug.LogError("Could not load First Light save: " + exception);
+                VeyrathLogger.Error("Save", "Could not load First Light save: " + exception);
                 Show("Save could not be loaded. See the Unity Console.", 4f);
             }
         }
@@ -270,11 +278,12 @@ namespace Veyrath.World
             GUI.Box(new Rect(12, 12, 310, 130), "PROJECT VEYRATH | FIRST LIGHT");
             GUI.Label(new Rect(24, 42, 285, 24), "Health: " + Mathf.CeilToInt(health) + "     Coins: " + inventory.coins);
             GUI.Label(new Rect(24, 66, 285, 40), "Quest: " + QuestDescription());
-            GUI.Label(new Rect(24, 108, 285, 24), "WASD move | E interact | Space attack | I inventory");
+            GUI.Label(new Rect(24, 108, 320, 24), "WASD move | E interact | Space attack | I inventory | O options");
             if (Time.time < messageUntil) GUI.Box(new Rect(12, Screen.height - 78, Mathf.Min(Screen.width - 24, 560), 62), message);
             if (GUI.Button(new Rect(Screen.width - 176, 12, 76, 30), "Save")) Save();
             if (GUI.Button(new Rect(Screen.width - 94, 12, 82, 30), "Load")) Load();
-            if (inventoryOpen)
+            if (GUI.Button(new Rect(Screen.width - 270, 12, 86, 30), "Options")) settingsOpen = !settingsOpen;
+            if (inventoryOpen && !settingsOpen)
             {
                 GUI.Box(new Rect(Screen.width - 290, 52, 278, 190), "INVENTORY");
                 GUI.Label(new Rect(Screen.width - 276, 82, 250, 24), "Coins: " + inventory.coins);
@@ -282,6 +291,27 @@ namespace Veyrath.World
                 for (int i = 0; i < inventory.items.Count; i++)
                     GUI.Label(new Rect(Screen.width - 276, 108 + i * 22, 250, 22), "• " + inventory.items[i]);
             }
+            if (settingsOpen) DrawSettings();
+        }
+
+        private void DrawSettings()
+        {
+            int panelX = Screen.width - 300;
+            GUI.Box(new Rect(panelX, 52, 288, 270), "SETTINGS");
+            if (GUI.Button(new Rect(panelX + 12, 82, 264, 30), "Display: " + (VeyrathSettings.IsFullscreen ? "Fullscreen" : "Windowed")))
+                VeyrathSettings.ToggleFullscreen();
+            if (GUI.Button(new Rect(panelX + 12, 118, 264, 30), "Resolution: " + Screen.width + " × " + Screen.height))
+                VeyrathSettings.CycleResolution();
+            if (GUI.Button(new Rect(panelX + 12, 154, 264, 30), "V-Sync: " + (VeyrathSettings.IsVSync ? "On" : "Off")))
+                VeyrathSettings.ToggleVSync();
+            if (GUI.Button(new Rect(panelX + 12, 190, 264, 30), "Frame limit: " + VeyrathSettings.FrameRateLabel))
+                VeyrathSettings.CycleFrameRate();
+            if (GUI.Button(new Rect(panelX + 12, 226, 264, 30), "Quality: " + VeyrathSettings.QualityLabel))
+                VeyrathSettings.CycleQuality();
+            GUI.Label(new Rect(panelX + 12, 261, 84, 24), "Master volume");
+            float volume = GUI.HorizontalSlider(new Rect(panelX + 112, 265, 138, 20), VeyrathSettings.MasterVolume, 0f, 1f);
+            if (!Mathf.Approximately(volume, VeyrathSettings.MasterVolume)) VeyrathSettings.SetMasterVolume(volume);
+            if (GUI.Button(new Rect(panelX + 12, 286, 264, 26), "Close")) settingsOpen = false;
         }
 
         private string QuestDescription()

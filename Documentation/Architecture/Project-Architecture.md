@@ -2,7 +2,7 @@
 
 ## Baseline
 
-Unity 6000.5.5f1, C#, URP 17.5.0 dependency, offline single-player. This is the exact editor already installed on the development Mac, chosen for immediate reproducibility. The installed editor is x86_64 and therefore uses Rosetta on the M3; before long-term work, migrate the project to a native Apple Silicon Unity 6 LTS editor after a tested version migration. `ProjectSettings/ProjectVersion.txt` is the pin. The Windows standalone module is installed; native Windows validation is not available in this environment. The URP package is declared, but a pipeline asset has not yet been generated and selected in Project Settings; this needs Editor validation before visual acceptance.
+Unity 6000.5.5f1, C#, offline single-player. This is the exact editor already installed on the development Mac, chosen for immediate reproducibility. The installed editor is x86_64 and therefore uses Rosetta on the M3; before long-term work, migrate the project to a native Apple Silicon Unity 6 LTS editor after a tested version migration. `ProjectSettings/ProjectVersion.txt` is the pin. The Windows standalone module is installed; native Windows validation is not available in this environment. The project currently uses Unity's default render pipeline: the bundled URP 17.5.0 compilation failed inside package code with missing Unity rendering types even after a clean package resolve, so URP integration is deferred until a compatible editor/package combination is available.
 
 ## Modules
 
@@ -12,7 +12,7 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 ## Scene flow
 
-`FirstLight.unity` contains the game controller. On play it builds the floor, capsule player, NPC, enemy, camera, and lighting. The player accepts the quest from Edda, defeats the Wraith, and returns for a reward. Quest and inventory state are serializable and round-trip through save/load.
+`FirstLight.unity` contains the game controller. A runtime bootstrap applies persisted options and supplies a fallback controller if the scene lacks one. On play it builds the floor, capsule player, NPC, enemy, camera, and lighting. The player accepts the quest from Edda, defeats the Wraith, and returns for a reward. Quest and inventory state are serializable and round-trip through save/load. A settings facade persists display, V-Sync, frame limit, quality preset, and master volume; project logging prefixes messages by subsystem.
 
 ## Next architecture steps
 

@@ -18,3 +18,4 @@
 *.VC.db
 *.DS_Store
 TestResults/
+test-results.xml

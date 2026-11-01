@@ -13,6 +13,7 @@ namespace Veyrath.Editor
         [MenuItem("Veyrath/Generate First Light Scene")]
         public static void Build()
         {
+            VeyrathProjectSetup.Configure();
             const string folder = "Assets/_Project/Scenes";
             Directory.CreateDirectory(folder);
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);

@@ -6,7 +6,7 @@ Done: inspected the empty repository, existing `.DS_Store`, Git state, host, Uni
 
 ## Fase 1/2 — Foundation and first slice (current)
 
-Create one URP-compatible scene with procedural placeholder geometry, third-person follow camera, movement, NPC interaction/dialogue, one quest, one enemy and combat, reward/inventory, and JSON save/load. The controller and scene generator are in `Assets/_Project/Scripts`. Validation is pending a Unity Editor import/compile/test/build pass.
+Create one Unity-default-pipeline scene with procedural placeholder geometry, third-person follow camera, movement, NPC interaction/dialogue, one quest, one enemy and combat, reward/inventory, and JSON save/load. Add a centralized logger, runtime bootstrap, persistent desktop settings UI, and Edit Mode tests. The repeatable Editor setup is under `Assets/_Project/Scripts/Editor`. URP is deferred because the installed editor's bundled package set fails in package code during compilation.
 
 ## Following steps
 

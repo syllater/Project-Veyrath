@@ -6,7 +6,7 @@
 
 ## ADR 002 — URP and primitive assets
 
-**Decision:** use URP 17.5.0 with simple geometry. It supports scalable rendering across the intended desktop platforms and avoids expensive bespoke rendering work in the slice. Keep visuals intentionally provisional; no external asset rights need to be assumed.
+**Decision:** defer URP integration and use the Unity project default render pipeline for the first foundation pass. Unity 6000.5.5f1's bundled URP 17.5.0 produced package compilation errors for missing Unity rendering types in a clean import. Revisit this decision when the editor package set compiles, then migrate to URP with an Editor validation pass. Keep visuals intentionally provisional; no external asset rights need to be assumed.
 
 ## ADR 003 — JSON local persistence
 
