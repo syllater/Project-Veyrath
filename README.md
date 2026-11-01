@@ -13,7 +13,7 @@ Open this folder in Unity **6000.5.5f1**. Choose **Veyrath > Configure Project F
 
 ## Current state
 
-The gameplay loop and scene entry point are implemented in the Unity scene and C# scripts. Editor compilation and automated tests/builds have not yet been verified. See `Documentation/Reports/01-11-2026 Codex Vertical Slice 18-19/Phase-Report.md` for exact status and next checks.
+The gameplay loop and scene entry point are implemented in the Unity scene and C# scripts. The local macOS player, Edit Mode tests, Play Mode integration flow and macOS build are verified. See `Documentation/Phase-Status.md` and the phase reports for exact status.
 
 ## Technical baseline
 

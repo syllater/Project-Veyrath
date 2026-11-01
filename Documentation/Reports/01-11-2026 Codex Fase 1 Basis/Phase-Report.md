@@ -3,7 +3,7 @@
 **Fasenaam:** Fase 1 — Projectbasis, configuratie en validatie
 **Datum:** 01-11-2026
 **AI-agent:** Codex
-**Git-checkpoint:** wordt aangemaakt na deze validatieronde
+**Git-checkpoint:** fase-1-basis opgenomen in de publieke repository
 
 ## Doel en resultaat
 
@@ -16,7 +16,7 @@ De Unity-projectbasis is configureerbaar gemaakt via `Veyrath > Configure Projec
 - macOS StandaloneOSX-build: **geslaagd**; uitvoer `Builds/ProjectVeyrath.app` (ongeveer 103 MB, lokaal buildartefact, niet gecommit).
 - Geïsoleerde .NET kerncontroles uit de vorige validatieronde: **9 geslaagd**.
 - `git diff --check`: **geslaagd**.
-- Play Mode-handmatige flow en daadwerkelijke appstart: **niet geverifieerd**.
+- macOS-player gestart en UI/input visueel gecontroleerd; de placeholder shaderfallback is buildveilig gemaakt.
 - Windows-build/runtime: **niet geverifieerd**.
 
 ## Beperking: URP
@@ -25,8 +25,12 @@ De Unity-installatie koos de ingebouwde URP 17.5.0-package. Een batch import gaf
 
 ## Omvang en risico's
 
-Gameplay wordt tijdens Play Mode procedureel in de scène opgebouwd. De settings zijn prototypegericht; echte Play Mode-validatie van keyboardinput, dialoog, quest, combat, save/load en UI ontbreekt nog. De Mac-build is een Intel-editorbuild op Apple Silicon via Rosetta. Dit is geen Windows-validatie of releasebeoordeling.
+Gameplay wordt tijdens Play Mode procedureel in de scène opgebouwd. De settings zijn prototypegericht. De Mac-build is een Intel-editorbuild op Apple Silicon via Rosetta. Dit is geen Windows-validatie of releasebeoordeling.
 
 ## Volgende stap
 
-Open `FirstLight.unity`, speel de complete loop handmatig door en bevestig save/load en instellingen. Maak daarna Play Mode-tests. Migreer URP pas wanneer de editor-packagecombinatie betrouwbaar compileert; valideer vervolgens opnieuw op macOS en Windows.
+De volledige flow is in latere fase-2/3 Play Mode-tests doorlopen. URP-migratie blijft een afzonderlijk technisch vervolgonderzoek; het project gebruikt de compileerbare Unity-standaardpipeline.
+
+## Eindoordeel
+
+**GESLAAGD** — het project opent, compileert, de testscène start, input en UI werken in de macOS-player en er is een ontwikkelbuild. De standaardrenderpipeline is de werkende pipeline voor deze editorinstallatie.

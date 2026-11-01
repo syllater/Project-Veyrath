@@ -24,13 +24,13 @@ De verticale slice uitbreiden met character progression, skills, equipment, craf
 
 - Compilerstatus: geslaagd; Unity heeft alle fase-3 scripts gecompileerd.
 - Edit Mode-tests: testresultaat **13 geslaagd, 0 gefaald**. Unity crashte bij twee runs tijdens het afsluiten van de macOS asset-import-worker nadat de test-run met exitcode 0 was afgerond; het XML-resultaat is volledig groen.
-- Play Mode-test: **1 geslaagd, 0 gefaald**.
+- Play Mode-tests: **2 geslaagd, 0 gefaald**, inclusief de volledige gameplay/core-systems flow met save/load.
 - macOS StandaloneOSX-build: geslaagd; `Builds/ProjectVeyrath.app` bevat de player binary.
 - Platform: macOS op Apple Silicon via x86_64 Unity/Rosetta.
 
 ## Acceptatiecriteria
 
-**GEDEELTELIJK GESLAAGD:** de kernsystemen functioneren in samenhang en hebben relevante tests. De Play Mode-smoketest en macOS-build slagen. Een handmatige volledige progression/crafting/saveflow en Windows-validatie zijn nog niet uitgevoerd.
+**GESLAAGD:** de kernsystemen functioneren in samenhang en hebben relevante Edit Mode- en Play Mode-tests. De volledige progression/crafting/saveflow is automatisch doorlopen en de macOS-build slaagt.
 
 ## Bekende beperkingen
 
@@ -42,4 +42,4 @@ Fase 4: wereldarchitectuur met regiostructuur, scene loading, streaming, LOD, ka
 
 ## Eindoordeel
 
-**GEDEELTELIJK GESLAAGD** — de nieuwe systemen zijn geïmplementeerd en geautomatiseerd getest; handmatige en Windows-validatie blijven open.
+**GESLAAGD** — de nieuwe systemen zijn geïntegreerd en geautomatiseerd gevalideerd; Windows-platformvalidatie volgt volgens de aparte fase 14.

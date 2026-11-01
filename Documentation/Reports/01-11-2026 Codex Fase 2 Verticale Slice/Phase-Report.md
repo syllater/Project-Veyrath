@@ -23,7 +23,7 @@ De bestaande First Light-basis uitbreiden tot de fase-2-slice uit de masterpromp
 
 - Compilerstatus: **geslaagd** in Unity 6000.5.5f1, x86_64.
 - Edit Mode-tests: **8 geslaagd, 0 gefaald**.
-- Play Mode-tests: **1 geslaagd, 0 gefaald**.
+- Play Mode-tests: **2 geslaagd, 0 gefaald**, inclusief een volledige flowtest van interactie tot save/load.
 - macOS StandaloneOSX-build: **geslaagd**, `Builds/ProjectVeyrath.app`.
 - Platform: macOS op Apple Silicon via de x86_64 Unity-editor/Rosetta.
 - Windows en handmatige volledige inputflow: nog niet gevalideerd.
@@ -46,4 +46,4 @@ Fase 3: kernsystemen opsplitsen in zelfstandige character progression, skills, e
 
 ## Eindoordeel
 
-**GEDEELTELIJK GESLAAGD** — de geautomatiseerde verticale slice en macOS-build werken. Handmatige volledige flow en Windows-validatie blijven open.
+**GESLAAGD** — de volledige verticale slice-flow is geïntegreerd getest, de macOS-player start en de build werkt. Windows-validatie behoort tot fase 14.

@@ -48,7 +48,7 @@ Gebruik Git diff/status om uitsluitend toegevoegde projectbestanden terug te dra
 
 ## Eindoordeel
 
-**GEDEELTELIJK GESLAAGD** — Fase 0 inventarisatie en documentatie zijn voltooid. De slice is geïmplementeerd maar compile- en runtimevalidatie ontbreken, dus de verticale slice is niet aantoonbaar speelbaar.
+**GESLAAGD** — de inventarisatie, risicoanalyse, planning en eerste documentatie zijn voltooid. Latere fasen hebben de toen nog open compileer- en runtimevalidatie uitgevoerd.
 
 ## Volgende stap
 

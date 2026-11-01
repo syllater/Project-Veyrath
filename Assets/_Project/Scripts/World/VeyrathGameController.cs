@@ -124,8 +124,9 @@ namespace Veyrath.World
         private static Material MakeMaterial(Color color)
         {
             bool scriptablePipelineActive = GraphicsSettings.currentRenderPipeline != null;
-            Shader shader = Shader.Find(scriptablePipelineActive ? "Universal Render Pipeline/Lit" : "Standard");
-            if (shader == null) shader = Shader.Find("Hidden/InternalErrorShader");
+            Shader shader = Shader.Find(scriptablePipelineActive ? "Universal Render Pipeline/Lit" : "Unlit/Color");
+            if (shader == null) shader = Shader.Find("Standard");
+            if (shader == null) shader = Shader.Find("Sprites/Default");
             Material material = new Material(shader) { color = color };
             return material;
         }

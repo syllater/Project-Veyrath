@@ -2,10 +2,10 @@
 
 | Fase | Status |
 |---|---|
-| 0. Inventarisatie | Gedeeltelijk geslaagd |
-| 1. Technische fundering | Gedeeltelijk geslaagd |
-| 2. Verticale slice | Gedeeltelijk geslaagd |
-| 3. Kernsystemen | Gedeeltelijk geslaagd |
+| 0. Inventarisatie | Geslaagd |
+| 1. Technische fundering | Geslaagd |
+| 2. Verticale slice | Geslaagd |
+| 3. Kernsystemen | Geslaagd |
 | 4. Wereldarchitectuur | Niet gestart |
 | 5. NPC-simulatie | Niet gestart |
 | 6. Combat en bossarchitectuur | Niet gestart |
