@@ -36,6 +36,10 @@ In progress: data-driven quest definitions, main/side quest lifecycle, objective
 
 Done: faction definitions and bounded reputation, territory ownership, regional stockpiles, risk-aware trade routes, treasury flow, conflicts, treaties, and player-driven world reactions. The controlled simulation is covered by Edit Mode tests.
 
+## Fase 9 — Nederzettingen en nevenactiviteiten
+
+Done: serializable settlement state, buildings, residents, defense, morale, resource storage and complete activity loops for gathering, fishing, hunting, cooking, alchemy and riding. Activities have explicit requirements, outputs, consumption and progression effects and are covered by Edit Mode tests.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.

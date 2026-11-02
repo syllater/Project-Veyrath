@@ -34,6 +34,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `FactionWorldSimulation` stores faction reputation/influence/treasury, territory ownership, regional stockpiles, risk-aware trade routes, conflicts, treaties and world reactions. `ApplyPlayerAction` provides a controlled hook for defend, trade and sabotage actions; daily simulation moves stock and funds along active routes while treaties suppress conflicts until expiry.
 
+## Settlement and activity simulation
+
+`SettlementState` stores residents, buildings, defense, morale, mounts and serializable resource storage. `SettlementActivityService` enforces the complete loops for gathering, fishing, hunting, cooking, alchemy and riding, plus building costs and daily food/morale upkeep. Requirements prevent free outputs and make each loop independently testable.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.

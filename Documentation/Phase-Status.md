@@ -11,7 +11,7 @@
 | 6. Combat en bossarchitectuur | Geslaagd |
 | 7. Quests en verhaal | In uitvoering |
 | 8. Facties, economie en oorlog | Geslaagd |
-| 9. Nederzettingen | Niet gestart |
+| 9. Nederzettingen | Geslaagd |
 | 10. Volledige wereldcontent | Niet gestart |
 | 11. Audio en lokalisatie | Niet gestart |
 | 12. Endgame en balans | Niet gestart |
