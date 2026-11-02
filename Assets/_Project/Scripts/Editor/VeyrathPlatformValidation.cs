@@ -34,6 +34,12 @@ namespace Veyrath.Editor
             lines.Add("- Failed: " + fail);
             lines.Add("- macOS runtime build: run separately on the CI/development host.");
             lines.Add("- Windows runtime build: not executed on this macOS host.");
+            lines.Add("");
+            lines.Add("## Checks covered by the runtime diagnostic");
+            lines.Add("");
+            lines.Add("- save directory and default save filename resolve through `Application.persistentDataPath`;");
+            lines.Add("- active scene, graphics device/API, screen dimensions, target frame rate and master volume are observable;");
+            lines.Add("- empty save filenames fall back to `veyrath-first-light.json`.");
             string directory = Path.GetDirectoryName(ReportPath);
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
             File.WriteAllLines(ReportPath, lines);

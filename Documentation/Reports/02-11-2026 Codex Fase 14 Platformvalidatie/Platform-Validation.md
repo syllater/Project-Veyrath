@@ -11,16 +11,11 @@ Automatisch gegenereerd door `Veyrath/Validate Platform Readiness`.
 
 - Passed: 4
 - Failed: 0
-- macOS runtime build: **passed** — `Builds/Phase14-macOS/ProjectVeyrath.app`.
-- Edit Mode test suite: **62/62 passed**.
-- Windows runtime build/smoke test: **not executed**; this is a macOS host. The Unity Windows target module is installed and the project is configured with both scenes.
+- macOS runtime build: run separately on the CI/development host.
+- Windows runtime build: not executed on this macOS host.
 
 ## Checks covered by the runtime diagnostic
 
 - save directory and default save filename resolve through `Application.persistentDataPath`;
 - active scene, graphics device/API, screen dimensions, target frame rate and master volume are observable;
 - empty save filenames fall back to `veyrath-first-light.json`.
-
-## Known warnings
-
-Unity reports existing obsolete API warnings for `FindFirstObjectByType`/`SetPropertyInt`; no test failures or build-blocking errors remain for the macOS validation player.
