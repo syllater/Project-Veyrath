@@ -13,6 +13,8 @@ Deze referenties zijn gegenereerd voor de eerste high-detail art pass van Projec
 | Weathered ashwood + iron | nederzettingen, ruïnes, props | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-4c5e87d8-2d74-4a82-a802-f219e109208b.png` | `Assets/_Project/Art/Textures/weathered_ashwood_iron_albedo.png` |
 | First Light environment | regio-compositie, ruïnes, forge, road, lighting | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-92923a56-e8c3-42d3-bc10-65a7f979fa24.png` | `Assets/_Project/Art/References/first_light_environment_concept.png` |
 | Ashland ground cover | terrein, foliage, lichen en losse stenen | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-85083991-e72c-4fc2-bd64-b454ba54131c.png` | `Assets/_Project/Art/Textures/ashland_groundcover_albedo.png` |
+| Veyrath weapons & props | shortblade, bow, staff, hammer, heartstone, satchel, forge tools | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-68e90ee5-555a-41b3-847b-9c2985816202.png` | `Assets/_Project/Art/References/veyrath_weapons_props_sheet.png` |
+| Ashen dungeon basalt | dungeon walls, arcane ruins, boss arena | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-7626cb04-53c1-4275-9ca8-46b7ccd0bd9b.png` | `Assets/_Project/Art/Textures/ashen_dungeon_basalt_albedo.png` |
 
 ## Import gate
 
