@@ -88,8 +88,10 @@ namespace Veyrath.World
             floor.transform.localScale = new Vector3(24f, 1f, 30f);
             floor.GetComponent<Renderer>().sharedMaterial = ground;
 
-            CreatePrimitive("Old road stone", PrimitiveType.Cube, new Vector3(-4f, 0.2f, 5f), new Vector3(2.2f, 1.5f, 1f), stone);
-            CreatePrimitive("Old road stone", PrimitiveType.Cube, new Vector3(4f, 0.2f, 5f), new Vector3(2.2f, 1.5f, 1f), stone);
+            if (ArtPrefabRuntimeLibrary.Spawn("Art/Prefabs/Veyrath_Ashland_Basalt_Boulder", new Vector3(-4f, 0.8f, 5f), Vector3.one * 1.5f) == null)
+                CreatePrimitive("Old road stone", PrimitiveType.Cube, new Vector3(-4f, 0.2f, 5f), new Vector3(2.2f, 1.5f, 1f), stone);
+            if (ArtPrefabRuntimeLibrary.Spawn("Art/Prefabs/Veyrath_Ashland_Basalt_Boulder", new Vector3(4f, 0.8f, 5f), Vector3.one * 1.5f) == null)
+                CreatePrimitive("Old road stone", PrimitiveType.Cube, new Vector3(4f, 0.2f, 5f), new Vector3(2.2f, 1.5f, 1f), stone);
 
             GameObject playerObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             playerObject.name = "Player | Placeholder adventurer";
@@ -103,7 +105,9 @@ namespace Veyrath.World
 
             npc = CreatePrimitive("Edda | NPC placeholder", PrimitiveType.Capsule, new Vector3(0f, 1f, 3f), Vector3.one, npcMat).transform;
             wraith = CreatePrimitive("Wraith | Enemy placeholder", PrimitiveType.Capsule, new Vector3(0f, 1f, 11f), Vector3.one, enemyMat).transform;
-            loot = CreatePrimitive("Loot | Wraith heartstone", PrimitiveType.Sphere, new Vector3(0f, 0.55f, 11f), Vector3.one * 0.55f, MakeMaterial(new Color(0.65f, 0.25f, 0.75f)));
+            loot = ArtPrefabRuntimeLibrary.Spawn("Art/Prefabs/Veyrath_Ashen_Wraith_Heartstone", new Vector3(0f, 0.8f, 11f), Vector3.one * 0.55f);
+            if (loot == null)
+                loot = CreatePrimitive("Loot | Wraith heartstone", PrimitiveType.Sphere, new Vector3(0f, 0.55f, 11f), Vector3.one * 0.55f, MakeMaterial(new Color(0.65f, 0.25f, 0.75f)));
             loot.SetActive(false);
 
             GameObject cameraObject = new GameObject("First Light Camera");
