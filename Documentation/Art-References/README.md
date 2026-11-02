@@ -36,6 +36,8 @@ De binaire PNG-assets zijn rechtstreeks als Git-blobs aan de publieke repository
 
 Voor de vier tileable materialen zijn daarnaast afgeleide grayscale roughness-kanalen toegevoegd met dezelfde naam en suffix `_roughness.png`. Deze zijn geschikt als startkanaal voor een Unity PBR-material; artistieke tuning en normal-map baking blijven onderdeel van de vervolgart pass.
 
+Voor dezelfde vier materialen zijn ook procedurele tangent-space normal-startkanalen toegevoegd met suffix `_normal.png`. Ze zijn technisch RGB-normal maps en moeten in Unity als Normal Map worden geïmporteerd en daarna artistiek worden verfijnd.
+
 ## Productiestandaard
 
 Voor echte ultra-detail runtime-assets is per hero/NPC-model nog nodig: sculpt/high-poly, retopologized game mesh, UV2, bake van normal/AO/curvature, PBR base-color/roughness/metallic/normal, LOD0–LOD2, rig, skin weights, animation set en Unity prefab. De huidige repository bevat nog primitive placeholders; deze referenties zijn de eerste stap richting die pipeline.
