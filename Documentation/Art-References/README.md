@@ -27,6 +27,8 @@ Deze drie OBJ-bestanden zijn echte importeerbare high-density base meshes (geen 
 | Ashen Wraith heartstone | `Assets/_Project/Art/Models/Ashen_Wraith_Heartstone.obj` |
 | Ashland basalt boulder | `Assets/_Project/Art/Models/Ashland_Basalt_Boulder.obj` |
 | Ash-steel shortblade | `Assets/_Project/Art/Models/Ash_Steel_Shortblade.obj` |
+| Veyrath arcane staff | `Assets/_Project/Art/Models/Veyrath_Arcane_Staff.obj` |
+| Veyrath warhammer | `Assets/_Project/Art/Models/Veyrath_Warhammer.obj` |
 
 ## Import gate
 
