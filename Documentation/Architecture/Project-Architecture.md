@@ -46,6 +46,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `VeyrathAudioManager` owns separate effects/music sources, intensity state and safe clip fallbacks. `LocalizationService` serves Dutch and English text with key fallback and validation; `SubtitleService` handles timed dialogue lines. `TtsProductionManifest` tracks locale-specific voice assets and reports missing files without throwing or blocking the game.
 
+## Endgame and balance
+
+`CharacterProgression` clamps progression at level 4000 and clears overflow XP. `BuildProfile`, `GearCollection`, `EndgameService` and `BossChallengeState` provide bounded builds, set bonuses, repeatable activities, long-term reward currency and phase-based endgame bosses. `EndingResolver` converts world consequences into alternate endings.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.
