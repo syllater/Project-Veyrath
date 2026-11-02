@@ -38,6 +38,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `SettlementState` stores residents, buildings, defense, morale, mounts and serializable resource storage. `SettlementActivityService` enforces the complete loops for gathering, fishing, hunting, cooking, alchemy and riding, plus building costs and daily food/morale upkeep. Requirements prevent free outputs and make each loop independently testable.
 
+## World content catalog
+
+`RegionCatalog` now exposes eight connected regions. `RegionContentDefinition` keeps authored content references grouped per region—settlements, ruins, dungeons, quests, NPCs, factions, bosses, items, resources, secrets and world events—so content can expand without changing streaming or simulation code.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.

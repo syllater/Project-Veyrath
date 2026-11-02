@@ -12,7 +12,7 @@
 | 7. Quests en verhaal | In uitvoering |
 | 8. Facties, economie en oorlog | Geslaagd |
 | 9. Nederzettingen | Geslaagd |
-| 10. Volledige wereldcontent | Niet gestart |
+| 10. Volledige wereldcontent | Geslaagd |
 | 11. Audio en lokalisatie | Niet gestart |
 | 12. Endgame en balans | Niet gestart |
 | 13. Optimalisatie | Niet gestart |

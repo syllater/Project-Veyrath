@@ -40,6 +40,10 @@ Done: faction definitions and bounded reputation, territory ownership, regional 
 
 Done: serializable settlement state, buildings, residents, defense, morale, resource storage and complete activity loops for gathering, fishing, hunting, cooking, alchemy and riding. Activities have explicit requirements, outputs, consumption and progression effects and are covered by Edit Mode tests.
 
+## Fase 10 — Volledige wereldcontent
+
+Done: the world catalog now contains eight connected authored regions. Each region has data-driven settlements, ruins, dungeons, quests, NPCs, factions, bosses, items, resources, secrets and world events; the catalog is validated for reachability and unique boss content.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.
