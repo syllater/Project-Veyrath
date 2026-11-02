@@ -11,7 +11,8 @@ Automatisch gegenereerd door `Veyrath/Validate Platform Readiness`.
 
 - Passed: 4
 - Failed: 0
-- macOS runtime build: run separately on the CI/development host.
+- macOS runtime build: **passed** — `Builds/Phase14-macOS/ProjectVeyrath.app`.
+- Edit Mode test suite: **62/62 passed**.
 - Windows runtime build: not executed on this macOS host.
 
 ## Checks covered by the runtime diagnostic
