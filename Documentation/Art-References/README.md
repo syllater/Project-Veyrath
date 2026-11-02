@@ -38,6 +38,8 @@ Voor de vier tileable materialen zijn daarnaast afgeleide grayscale roughness-ka
 
 Voor dezelfde vier materialen zijn ook procedurele tangent-space normal-startkanalen toegevoegd met suffix `_normal.png`. Ze zijn technisch RGB-normal maps en moeten in Unity als Normal Map worden geïmporteerd en daarna artistiek worden verfijnd.
 
+Alle twaalf texturebestanden en vijf OBJ-modellen hebben nu vaste Unity `.meta`-bestanden met stabiele GUID’s. Hierdoor blijven referenties behouden bij clones en latere prefab/material-koppelingen.
+
 ## Productiestandaard
 
 Voor echte ultra-detail runtime-assets is per hero/NPC-model nog nodig: sculpt/high-poly, retopologized game mesh, UV2, bake van normal/AO/curvature, PBR base-color/roughness/metallic/normal, LOD0–LOD2, rig, skin weights, animation set en Unity prefab. De huidige repository bevat nog primitive placeholders; deze referenties zijn de eerste stap richting die pipeline.
