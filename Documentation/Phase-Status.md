@@ -15,7 +15,7 @@
 | 10. Volledige wereldcontent | Geslaagd |
 | 11. Audio en lokalisatie | Geslaagd |
 | 12. Endgame en balans | Geslaagd |
-| 13. Optimalisatie | Niet gestart |
+| 13. Optimalisatie | Geslaagd |
 | 14. Platformvalidatie | Niet gestart |
 | 15. Releasevoorbereiding | Niet gestart |
 

@@ -7,6 +7,7 @@ namespace Veyrath.World
     {
         public NpcSimulationService Service { get; private set; } = new NpcSimulationService();
         private RegionStreamingManager regions;
+        private int lastSimulatedMinute = -1;
 
         public void Initialize(RegionStreamingManager regionManager)
         {
@@ -21,12 +22,17 @@ namespace Veyrath.World
                     new NpcRoutineSegment { startMinute = 1080, endMinute = 1440, activity = "patrol", regionId = "first-light" }
                 }
             });
-            Service.SimulateTo(regions.State.worldMinutes);
+            lastSimulatedMinute = regions.State.worldMinutes;
+            Service.SimulateTo(lastSimulatedMinute);
         }
 
         private void Update()
         {
-            if (regions != null && Service.SimulateOffscreen) Service.SimulateTo(regions.State.worldMinutes);
+            if (regions != null && Service.SimulateOffscreen && regions.State.worldMinutes != lastSimulatedMinute)
+            {
+                lastSimulatedMinute = regions.State.worldMinutes;
+                Service.SimulateTo(lastSimulatedMinute);
+            }
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Veyrath.World
         {
             RegionDefinition definition = RegionCatalog.Get(regionId);
             if (definition == null || !State.EnterRegion(regionId)) return false;
+            if (loadedRegions.Contains(regionId)) return true;
             loadedRegions.Add(regionId);
             if (!Application.CanStreamedLevelBeLoaded(definition.sceneName)) return true;
             SceneManager.LoadSceneAsync(definition.sceneName, LoadSceneMode.Additive);

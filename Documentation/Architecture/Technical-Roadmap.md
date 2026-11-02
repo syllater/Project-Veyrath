@@ -52,6 +52,10 @@ Done: safe audio effects/music management, dynamic music intensity, subtitle tim
 
 Done: level cap 4000 with overflow-safe progression, build stat allocation, unique gear and set bonuses, repeatable endgame activities, long-term rewards, multi-phase boss challenges and alternative ending resolution. Extreme-stat and long-progression behavior is covered by Edit Mode tests.
 
+## Fase 13 — Optimalisatie
+
+Done: bounded runtime performance sampling, reusable object-pool infrastructure, NPC simulation invalidation by world-time change, and duplicate additive-region-load prevention. Changes are deliberately targeted at measured hot paths and covered by Edit Mode tests.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.

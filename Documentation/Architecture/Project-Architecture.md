@@ -50,6 +50,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `CharacterProgression` clamps progression at level 4000 and clears overflow XP. `BuildProfile`, `GearCollection`, `EndgameService` and `BossChallengeState` provide bounded builds, set bonuses, repeatable activities, long-term reward currency and phase-based endgame bosses. `EndingResolver` converts world consequences into alternate endings.
 
+## Performance instrumentation
+
+`RuntimePerformanceMonitor` captures frame time, managed memory, allocated memory, loaded regions and simulated NPC count into a bounded ring buffer. `ObjectPool<T>` provides reusable allocation-free object ownership, while NPC and region streaming paths avoid redundant work when state has not changed.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.
