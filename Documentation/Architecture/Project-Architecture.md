@@ -42,6 +42,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `RegionCatalog` now exposes eight connected regions. `RegionContentDefinition` keeps authored content references grouped per region—settlements, ruins, dungeons, quests, NPCs, factions, bosses, items, resources, secrets and world events—so content can expand without changing streaming or simulation code.
 
+## Audio and localization
+
+`VeyrathAudioManager` owns separate effects/music sources, intensity state and safe clip fallbacks. `LocalizationService` serves Dutch and English text with key fallback and validation; `SubtitleService` handles timed dialogue lines. `TtsProductionManifest` tracks locale-specific voice assets and reports missing files without throwing or blocking the game.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.
