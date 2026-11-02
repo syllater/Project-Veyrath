@@ -42,6 +42,8 @@ Alle twaalf texturebestanden en vijf OBJ-modellen hebben nu vaste Unity `.meta`-
 
 Er zijn ook vier Unity Standard-materialen toegevoegd die albedo, roughness en normal rechtstreeks koppelen: `Veyrath_AncientStone.mat`, `Veyrath_WeatheredAshwoodIron.mat`, `Veyrath_AshlandGroundcover.mat` en `Veyrath_AshenDungeonBasalt.mat`.
 
+De vijf model-prefabs zijn daarnaast gespiegeld naar `Assets/Resources/Art/Prefabs/`. `ArtPrefabRuntimeLibrary` laadt boulder- en heartstone-prefabs tijdens First Light; als een asset ontbreekt blijft de primitive fallback actief. Hierdoor blijft de scene speelbaar en gebruikt hij automatisch de authored modellen wanneer de import beschikbaar is.
+
 ## Productiestandaard
 
 Voor echte ultra-detail runtime-assets is per hero/NPC-model nog nodig: sculpt/high-poly, retopologized game mesh, UV2, bake van normal/AO/curvature, PBR base-color/roughness/metallic/normal, LOD0–LOD2, rig, skin weights, animation set en Unity prefab. De huidige repository bevat nog primitive placeholders; deze referenties zijn de eerste stap richting die pipeline.
