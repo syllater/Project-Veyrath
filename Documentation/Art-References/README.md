@@ -16,7 +16,7 @@ Deze referenties zijn gegenereerd voor de eerste high-detail art pass van Projec
 
 ## Import gate
 
-De projectmount weigert momenteel binaire writes onder `Assets/` en `Documentation/` met `Operation not permitted`. Daarom zijn de bestanden nog niet in Unity geïmporteerd. Zodra de workspace schrijfbaar is, moeten de PNG's worden gekopieerd naar de Unity-doelen en daarna worden gecontroleerd op import, texture compression, mipmaps, kleur/normal-workflow en materiaalreferenties.
+De binaire PNG-assets zijn rechtstreeks als Git-blobs aan de publieke repository toegevoegd omdat de lokale projectmount writes onder `Assets/` weigert met `Operation not permitted`. Ze staan nu op `master` in de Unity-doelpaden hierboven. Unity moet ze nog lokaal importeren en controleren op texture compression, mipmaps, kleur/normal-workflow en materiaalreferenties zodra de projectmount opnieuw schrijfbaar is.
 
 ## Productiestandaard
 
