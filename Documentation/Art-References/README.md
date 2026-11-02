@@ -18,6 +18,16 @@ Deze referenties zijn gegenereerd voor de eerste high-detail art pass van Projec
 | Ashen Reach environment | volcanic frontier, watchtowers, bridge, caldera | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-4587ae88-5ef8-41fd-b263-cec1457f5686.png` | `Assets/_Project/Art/References/ashen_reach_environment_concept.png` |
 | Ashland vegetation kit | grass, thorn shrubs, ember moss, crystals, deadwood | `/Users/sylvian/.codex/generated_images/01a1981f-0c52-7bd0-90c0-cb92b4d161f9/exec-30ab54da-d29e-44c2-8597-281862ae6c0d.png` | `Assets/_Project/Art/References/ashland_vegetation_kit.png` |
 
+## Procedural model bases
+
+Deze drie OBJ-bestanden zijn echte importeerbare high-density base meshes (geen conceptbeelden). Ze zijn bedoeld als sculpt/retopology-startpunt; materiaal, UV’s, rigging en LOD’s moeten nog in de art-pipeline worden afgewerkt.
+
+| Model | Unity-pad |
+|---|---|
+| Ashen Wraith heartstone | `Assets/_Project/Art/Models/Ashen_Wraith_Heartstone.obj` |
+| Ashland basalt boulder | `Assets/_Project/Art/Models/Ashland_Basalt_Boulder.obj` |
+| Ash-steel shortblade | `Assets/_Project/Art/Models/Ash_Steel_Shortblade.obj` |
+
 ## Import gate
 
 De binaire PNG-assets zijn rechtstreeks als Git-blobs aan de publieke repository toegevoegd omdat de lokale projectmount writes onder `Assets/` weigert met `Operation not permitted`. Ze staan nu op `master` in de Unity-doelpaden hierboven. Unity moet ze nog lokaal importeren en controleren op texture compression, mipmaps, kleur/normal-workflow en materiaalreferenties zodra de projectmount opnieuw schrijfbaar is.
