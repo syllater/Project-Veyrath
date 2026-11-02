@@ -34,6 +34,8 @@ Deze drie OBJ-bestanden zijn echte importeerbare high-density base meshes (geen 
 
 De binaire PNG-assets zijn rechtstreeks als Git-blobs aan de publieke repository toegevoegd omdat de lokale projectmount writes onder `Assets/` weigert met `Operation not permitted`. Ze staan nu op `master` in de Unity-doelpaden hierboven. Unity moet ze nog lokaal importeren en controleren op texture compression, mipmaps, kleur/normal-workflow en materiaalreferenties zodra de projectmount opnieuw schrijfbaar is.
 
+Voor de vier tileable materialen zijn daarnaast afgeleide grayscale roughness-kanalen toegevoegd met dezelfde naam en suffix `_roughness.png`. Deze zijn geschikt als startkanaal voor een Unity PBR-material; artistieke tuning en normal-map baking blijven onderdeel van de vervolgart pass.
+
 ## Productiestandaard
 
 Voor echte ultra-detail runtime-assets is per hero/NPC-model nog nodig: sculpt/high-poly, retopologized game mesh, UV2, bake van normal/AO/curvature, PBR base-color/roughness/metallic/normal, LOD0–LOD2, rig, skin weights, animation set en Unity prefab. De huidige repository bevat nog primitive placeholders; deze referenties zijn de eerste stap richting die pipeline.
