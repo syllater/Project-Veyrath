@@ -16,7 +16,7 @@
 | 11. Audio en lokalisatie | Geslaagd |
 | 12. Endgame en balans | Geslaagd |
 | 13. Optimalisatie | Geslaagd |
-| 14. Platformvalidatie | Niet gestart |
+| 14. Platformvalidatie | Geslaagd |
 | 15. Releasevoorbereiding | Niet gestart |
 
 Deze tabel wordt bijgewerkt na iedere fasevalidatie. Een fase krijgt alleen de status **Geslaagd** wanneer alle relevante acceptatiecriteria zijn aangetoond; anders blijft de status **Gedeeltelijk geslaagd** of **Gefaald**.

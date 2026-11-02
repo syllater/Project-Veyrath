@@ -54,6 +54,10 @@ The prototype keeps dependencies explicit and small. Runtime systems are compose
 
 `RuntimePerformanceMonitor` captures frame time, managed memory, allocated memory, loaded regions and simulated NPC count into a bounded ring buffer. `ObjectPool<T>` provides reusable allocation-free object ownership, while NPC and region streaming paths avoid redundant work when state has not changed.
 
+## Platform validation
+
+`PlatformValidation` provides a platform-neutral startup diagnostic and keeps save files under `Application.persistentDataPath`. The Editor-only `VeyrathPlatformValidation` command verifies enabled build scenes and installed standalone targets, and its build command creates a reproducible macOS validation player. Windows is a declared target but requires a real Windows runtime smoke test before release.
+
 ## Next architecture steps
 
 Separate input actions, combatants, dialogue/quest data, UI, and persistence as systems mature. Add assembly definitions after the runtime/test assembly split is established. Add additive zone streaming only after profiling a second connected zone. Preserve offline functionality and keep all content replaceable without hard dependencies on external assets.

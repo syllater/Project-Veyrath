@@ -56,6 +56,10 @@ Done: level cap 4000 with overflow-safe progression, build stat allocation, uniq
 
 Done: bounded runtime performance sampling, reusable object-pool infrastructure, NPC simulation invalidation by world-time change, and duplicate additive-region-load prevention. Changes are deliberately targeted at measured hot paths and covered by Edit Mode tests.
 
+## Fase 14 — Platformvalidatie
+
+Done: platform diagnostics expose the persistent save location, graphics API/device, active scene, display state, frame-rate target and audio volume. An Editor validation command checks enabled build scenes and installed standalone targets. A macOS validation player was built successfully from both enabled scenes. Windows runtime execution remains explicitly untested on this macOS host and is tracked as release follow-up work.
+
 ## Following steps
 
 1. Open the project in Unity 6000.5.5f1, resolve package/import/compiler issues, and run the slice. Add Edit Mode and Play Mode coverage for quest progression and save round trips.
